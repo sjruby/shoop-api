@@ -35,6 +35,6 @@ class BoardsController < ApplicationController
 
   # # Only allow a trusted parameter "white list" through.
   def board_params
-    params.require(:board).permit(:title, :cells)
+    params.permit(:title, :cells)
   end
 end
