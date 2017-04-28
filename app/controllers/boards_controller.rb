@@ -12,6 +12,17 @@ class BoardsController < ApplicationController
     render json: @board
   end
 
+  # POST data
+  def create
+    @new_board = Board.new(board_params)
+
+    if @new_board.save
+      render json: @new_board, status: :created, location: @new_board
+    else
+      render json: @new_board.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /doctors/1
   def update
     if @board.update(board_params)
