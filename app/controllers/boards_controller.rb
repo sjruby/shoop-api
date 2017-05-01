@@ -1,8 +1,8 @@
-class BoardsController < ApplicationController
+class BoardsController < ProtectedController
   before_action :set_board, only: [:show, :update, :destroy]
 
   def index
-    @boards = Board.all
+    @boards = Board.where(user: current_user.id)
 
     render json: @boards
   end
@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
 
   # POST data
   def create
-    @new_board = Board.new(board_params)
+    @new_board = current_user.boards.new(board_params)
 
     if @new_board.save
       render json: @new_board, status: :created, location: @new_board
@@ -41,7 +41,7 @@ class BoardsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_board
-    @board = Board.find(params[:id])
+    @board = current_user.boards.find(params[:id])
   end
 
   # # Only allow a trusted parameter "white list" through.
