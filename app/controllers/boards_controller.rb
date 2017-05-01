@@ -14,7 +14,7 @@ class BoardsController < ProtectedController
 
   # POST data
   def create
-    @new_board = current_user.boards.new(board_params)
+    @new_board = current_user.boards.build(board_params)
 
     if @new_board.save
       render json: @new_board, status: :created, location: @new_board
