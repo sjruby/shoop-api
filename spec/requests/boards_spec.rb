@@ -50,10 +50,10 @@ RSpec.describe 'Boards', type: :request do
      Board.all
    end
 
-  describe 'GET /boards' do
+  describe 'GET /list-boards' do
     it 'lists all boards' do
       # Make the request
-      get '/boards', headers: headers
+      get '/list-boards', headers: headers
       # Expect the request to be a response
       expect(response).to be_success
       # Pull the response from server

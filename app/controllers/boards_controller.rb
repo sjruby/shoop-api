@@ -2,6 +2,12 @@ class BoardsController < ProtectedController
   before_action :set_board, only: [:show, :update, :destroy]
 
   def index
+    @boards = Board
+
+    render json: @boards
+  end
+
+  def listboards
     @boards = Board.where(user: current_user.id)
 
     render json: @boards

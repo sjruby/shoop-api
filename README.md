@@ -240,13 +240,13 @@ Content-Type: application/json; charset=utf-8
 
 Below are the actions associated with CRUDING on the Boards resource
 
-| Verb  | URI Pattern  | Controller#Action |
-|-------|--------------|-------------------|
-| GET   | `/boards`    | `boards#index`    |
-| GET   | `/boards/1`  | `boards#show`     |
-| POST  | `/boards`    | `boards#create`   |
-| PATCH | `/boards/1`  | `boards#show`     |
-| DELETE| `/boards/1`  | `boards#show`     |
+| Verb  | URI Pattern   | Controller#Action |
+|-------|---------------|-------------------|
+| GET   | `/list-boards'| `boards#index`    |
+| GET   | `/boards/1`   | `boards#show`     |
+| POST  | `/boards`     | `boards#create`   |
+| PATCH | `/boards/1`   | `boards#show`     |
+| DELETE| `/boards/1`   | `boards#show`     |
 
 #### GET /boards
 

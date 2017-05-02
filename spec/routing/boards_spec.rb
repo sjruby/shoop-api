@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'routes for boards' do
-  it 'routes GET /boards to the boards#index action' do
+  it 'routes GET /list-boards to the boards#listboards action' do
     # check that a get request to /boards routes to the index method
     # of the boards controller
-    expect(get('/boards')).to route_to('boards#index')
+    expect(get('/list-boards')).to route_to('boards#listboards')
   end
 
   it 'routes GET /boards/:id to the boards#show action' do
