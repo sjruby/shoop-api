@@ -1,14 +1,22 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# rails-api-template
+# Shoop API
 
-A template for starting projects with `rails-api`. Includes authentication.
+Make your art dance with SHOOP.
 
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
+- Shoop App: https://sjruby.github.io/wdi-client-project-two/index.html
+- Shoop Client Repo: https://github.com/sjruby/wdi-client-project-two
 
-## Dependencies
+## About Shoop
 
-Install with `bundle install`.
+Shoop allows users to generate random patters of two colors on a 28x28 grid.  Further it allows users to animate the board according Conways Game Of Life Rules.
+
+## Data Model
+
+The final ERD is below:
+[Imgur](http://i.imgur.com/iJJHGzt.jpg?1)
+
+## Dependinces:
 
 -   [`rails-api`](https://github.com/rails-api/rails-api)
 -   [`rails`](https://github.com/rails/rails)
@@ -16,21 +24,8 @@ Install with `bundle install`.
 -   [`ruby`](https://www.ruby-lang.org/en/)
 -   [`postgres`](http://www.postgresql.org)
 
-Until Rails 5 is released, this template should follow the most recent released
-version of Rails 4, as well as track `master` branches for `rails-api` and
-`active_model_serializers`.
+## Local Setup
 
-## Installation
-
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory.
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Move into the new project and `git init`.
-1.  Install dependencies with `bundle install`.
-1.  Rename your app module in `config/application.rb` (change
-    `RailsApiTemplate`).
-1.  Rename your project database in `config/database.yml` (change
-    `'rails-api-template'`).
 1.  Create a `.env` for sensitive settings (`touch .env`).
 1.  Generate new `development` and `test` secrets (`bundle exec rake secret`).
 1.  Store them in `.env` with keys `SECRET_KEY_BASE_<DEVELOPMENT|TEST>`
@@ -68,15 +63,9 @@ Developers should run these often!
 <!-- TODO -   `rake nag` checks your code style. -->
 <!-- TODO -   `rake lint` checks your code for syntax errors. -->
 
-## API
+## Authentication API
 
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
+Below are the authentication actions and associated Sriptes
 
 ### Authentication
 
@@ -274,27 +263,178 @@ Content-Type: application/json; charset=utf-8
   }
 }
 ```
+## Shoop API
 
-### Reset Database without dropping
+Below are the actions associated with CRUDING on the Boards resource
 
-This is not a task developers should run often, but it is sometimes necessary.
+| Verb  | URI Pattern  | Controller#Action |
+|-------|--------------|-------------------|
+| GET   | `/boards`    | `boards#index`    |
+| GET   | `/boards/1`  | `boards#show`     |
+| POST  | `/boards`    | `boards#create`   |
+| PATCH | `/boards/1`  | `boards#show`     |
+| DELETE| `/boards/1`  | `boards#show`     |
 
-**locally**
+#### GET /boards
+
+Request:
 
 ```sh
-bin/rake db:migrate VERSION=0
-bin/rake db:migrate db:seed db:examples
+curl --include --request GET https://protected-ridge-58465.herokuapp.com/boards \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+```
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+  "boards": [
+    {
+      "id": 2,
+      "title": "test"
+      "cells":"[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+    },
+
+      {
+        "id": 2,
+        "title": "NewBoard"
+        "cells":"[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+      }
+  ]
+}
 ```
 
-**heroku**
+
+## Shoop API
+
+Below are the actions associated with CRUDING on the Boards resource
+
+| Verb  | URI Pattern  | Controller#Action |
+|-------|--------------|-------------------|
+| GET   | `/boards`    | `boards#index`    |
+| GET   | `/boards/1`  | `boards#show`     |
+| POST  | `/boards`    | `boards#create`   |
+| PATCH | `/boards/1`  | `boards#show`     |
+| DELETE| `/boards/1`  | `boards#show`     |
+
+#### GET /boards
+
+Request:
 
 ```sh
-heroku run rake db:migrate VERSION=0
-heroku run rake db:migrate db:seed db:examples
+curl --include --request GET https://protected-ridge-58465.herokuapp.com/boards \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+```
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+  "boards": [
+    {
+      "id": 2,
+      "title": "test"
+      "cells":"[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+    },
+
+      {
+        "id": 2,
+        "title": "NewBoard"
+        "cells":"[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+      }
+  ]
+}
 ```
 
-## [License](LICENSE)
 
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+#### GET /boards/:id
+Request:
+
+```sh
+curl --include --request GET https://protected-ridge-58465.herokuapp.com/boards/2 \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{
+"board": [
+  {
+    "id": 2,
+    "title": "test"
+    "cells":"[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+  }
+  }
+```
+
+#### POST /boards
+Request:
+
+```sh
+curl --include --request POST https://protected-ridge-58465.herokuapp.com/boards \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+ --data '{
+      "board": {
+        "title": "Ima board",
+        "cells": ""[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]""
+      }
+    }'
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+
+{
+     "board": {
+       "title": "Ima board",
+       "cells": "[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]"
+     }
+   }
+
+```
+#### PATCH /boards/1
+
+Request:
+
+```sh
+curl --include --request PATCH https://protected-ridge-58465.herokuapp.com/boards \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+ --data '{
+      "board": {
+        "title": "Ima UPDATED BOARD",
+        "cells": ""[[{\"xCord\":0,\"yCord\":0,\"intialValue\":2},{\"xCord\":0,\"yCord\":1,\"intialValue\":1},{\"xCord\":0,\"yCord\":2,\"intialValue\":2}]]""
+      }
+    }'
+```
+
+Response:
+
+```md
+HTTP/1.1 204 No Content
+```
+
+#### DELETE /boards/1
+
+Request:
+
+```sh
+curl --include --request DELETE https://protected-ridge-58465.herokuapp.com/boards/1 \
+  --header "Authorization: Token token=3481054d61508f98d6c40aeccfeacaa2" \
+```
+
+Response:
+
+```md
+HTTP/1.1 204 No Content
+```
