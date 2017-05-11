@@ -121,10 +121,10 @@ RSpec.describe 'Boards', type: :request do
 
   context 'when NOT authenticated' do
 
-   describe 'GET /boards' do
+   describe 'GET /list-boards' do
      it 'is not sucessful' do
        # Make the request
-       get '/boards'
+       get '/list-boards'
        # Expect the request to be a response
        expect(response).to_not be_success
      end

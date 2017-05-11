@@ -1,4 +1,4 @@
 class Board < ApplicationRecord
-  serialize :cells
+  # serialize :cells
   belongs_to :user
 end

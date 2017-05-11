@@ -3,7 +3,6 @@ class BoardsController < ProtectedController
 
   def index
     @boards = Board
-
     render json: @boards
   end
 
